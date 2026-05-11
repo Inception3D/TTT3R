@@ -5,6 +5,8 @@
 
 [![arXiv](https://img.shields.io/badge/Arxiv-2509.26645-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2509.26645) 
 [![Home Page](https://img.shields.io/badge/Project-Website-33728E.svg)](https://rover-xingyu.github.io/TTT3R) 
+![ICLR 2026](https://img.shields.io/badge/ICLR-2026-e28353.svg)
+![China3DV 2026 Top 5 Paper](https://img.shields.io/badge/China3DV%202026-Top%205%20Paper-b8736c.svg)
 [![X](https://img.shields.io/badge/@Xingyu%20Chen-black?logo=X)](https://x.com/RoverXingyu)  [![Bluesky](https://img.shields.io/badge/@Xingyu%20Chen-white?logo=Bluesky)](https://bsky.app/profile/xingyu-chen.bsky.social)
 
 

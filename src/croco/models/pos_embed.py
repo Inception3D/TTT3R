@@ -151,6 +151,10 @@ except ImportError:
 
         def apply_rope1d(self, tokens, pos1d, cos, sin):
             assert pos1d.ndim == 2
+            # Safety guard for environments where dynamic shape / dtype interactions
+            # can occasionally produce out-of-range position indices.
+            max_idx = cos.shape[0] - 1
+            pos1d = pos1d.clamp(min=0, max=max_idx)
             cos = torch.nn.functional.embedding(pos1d, cos)[:, None, :, :]
             sin = torch.nn.functional.embedding(pos1d, sin)[:, None, :, :]
             return (tokens * cos) + (self.rotate_half(tokens) * sin)

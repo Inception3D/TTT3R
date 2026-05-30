@@ -1,0 +1,3 @@
+config,tau,num_scenes,median_ate,mean_ate,median_rpe_trans,median_rpe_rot
+ttt3r_momentum_inv_t1,1.0,130,0.19217,0.2614715384615384,0.04186,0.96862
+ttt3r_momentum_inv_t2,2.0,130,0.26213,0.3106796923076924,0.06084,1.46031

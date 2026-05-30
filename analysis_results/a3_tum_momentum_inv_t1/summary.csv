@@ -1,0 +1,2 @@
+num_scenes,num_improved,num_degraded,median_baseline_ate,median_method_ate,mean_rel_improve_pct,median_rel_improve_pct,best_scene,worst_scene
+8,7,1,0.08224,0.06554499999999999,14.903177344017122,10.20987754750984,rgbd_dataset_freiburg3_sitting_halfsphere,rgbd_dataset_freiburg3_walking_static

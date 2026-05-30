@@ -1,0 +1,33 @@
+tum_s1_1000-rgbd_dataset_freiburg3_sitting_halfsphere | ATE: 0.14589, RPE trans: 0.05636, RPE rot: 5.73226
+0.14589
+0.05636
+5.73226
+tum_s1_1000-rgbd_dataset_freiburg3_sitting_rpy | ATE: 0.05755, RPE trans: 0.00933, RPE rot: 1.07046
+0.05755
+0.00933
+1.07046
+tum_s1_1000-rgbd_dataset_freiburg3_sitting_static | ATE: 0.02340, RPE trans: 0.00437, RPE rot: 0.14462
+0.02340
+0.00437
+0.14462
+tum_s1_1000-rgbd_dataset_freiburg3_sitting_xyz | ATE: 0.04653, RPE trans: 0.00822, RPE rot: 0.26853
+0.04653
+0.00822
+0.26853
+tum_s1_1000-rgbd_dataset_freiburg3_walking_halfsphere | ATE: 0.10598, RPE trans: 0.02220, RPE rot: 1.36769
+0.10598
+0.02220
+1.36769
+tum_s1_1000-rgbd_dataset_freiburg3_walking_rpy | ATE: 0.11387, RPE trans: 0.01757, RPE rot: 2.19283
+0.11387
+0.01757
+2.19283
+tum_s1_1000-rgbd_dataset_freiburg3_walking_static | ATE: 0.01896, RPE trans: 0.00229, RPE rot: 0.16489
+0.01896
+0.00229
+0.16489
+tum_s1_1000-rgbd_dataset_freiburg3_walking_xyz | ATE: 0.07095, RPE trans: 0.01227, RPE rot: 0.39311
+0.07095
+0.01227
+0.39311
+Average ATE: 0.07289, Average RPE trans: 0.01658, Average RPE rot: 1.41680

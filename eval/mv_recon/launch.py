@@ -40,13 +40,36 @@ def get_args_parser():
     parser.add_argument("--freeze", action="store_true")
     parser.add_argument("--max_frames", type=int, default=None, help="max frames limit")
     parser.add_argument("--model_update_type", type=str, default="cut3r", help="model update type")
+    parser.add_argument("--spectral_temperature", type=float, default=1.0, help="Layer 2 SIASU temperature")
+    parser.add_argument("--geo_gate_tau", type=float, default=2.0, help="Layer 3 geo gate temperature")
+    parser.add_argument("--geo_gate_freq_cutoff", type=int, default=4, help="Layer 3 geo gate freq cutoff denominator")
     parser.add_argument("--voxel_size", type=float, default=0.0, help="voxel size for voxel grid downsampling, 0 means no downsampling")
+    parser.add_argument("--alpha", type=float, default=0.5, help="DDD3R constant dampening rate")
+    parser.add_argument("--alpha_perp", type=float, default=0.5, help="DDD3R novel component coefficient")
+    parser.add_argument("--alpha_parallel", type=float, default=0.05, help="DDD3R drift component coefficient")
+    parser.add_argument("--beta_ema", type=float, default=0.95, help="DDD3R EMA decay for drift direction")
+    parser.add_argument("--gamma", type=float, default=0.0, help="DDD3R steep adaptive exponent (0=fixed ortho, >0=drift-adaptive)")
+    parser.add_argument("--brake_tau", type=float, default=2.0, help="DDD3R brake temperature")
+    parser.add_argument("--warmup_t0", type=int, default=0, help="DDD3R: no drift suppression for first T0 frames")
+    parser.add_argument("--warmup_window", type=int, default=0, help="DDD3R: linear ramp window after T0")
+    # Auto-gamma variants
+    parser.add_argument("--auto_gamma", type=str, default="", help="Auto-gamma mode: warmup_linear, warmup_threshold, steep_sigmoid, steep_clamp")
+    parser.add_argument("--auto_gamma_warmup", type=int, default=30, help="Auto-gamma warmup frames")
+    parser.add_argument("--auto_gamma_max", type=float, default=3.0, help="Auto-gamma max gamma value")
+    parser.add_argument("--auto_gamma_k", type=float, default=10.0, help="steep_sigmoid sharpness")
+    parser.add_argument("--auto_gamma_lo", type=float, default=0.3, help="steep_clamp low threshold")
+    parser.add_argument("--auto_gamma_hi", type=float, default=0.6, help="steep_clamp high threshold")
+    parser.add_argument("--eval_dataset", type=str, default="7scenes",
+                        choices=["7scenes", "dtu", "all"],
+                        help="which reconstruction dataset to evaluate")
+    parser.add_argument("--dtu_root", type=str, default="./data/dtu",
+                        help="path to preprocessed DTU dataset (MVSNet format)")
     return parser
 
 
 def main(args):
     add_path_to_dust3r(args.weights)
-    from eval.mv_recon.data import SevenScenes, NRGBD
+    from eval.mv_recon.data import SevenScenes, NRGBD, DTU
     from eval.mv_recon.utils import accuracy, completion
 
     if args.size == 512:
@@ -55,17 +78,36 @@ def main(args):
         resolution = 224
     else:
         raise NotImplementedError
-    datasets_all = {
-        "7scenes": SevenScenes(
+
+    datasets_all = {}
+
+    if args.eval_dataset in ("7scenes", "all"):
+        datasets_all["7scenes"] = SevenScenes(
             split="test",
-            ROOT="/home/share/Dataset/3D_scene/7scenes/", # "./data/7scenes",
+            ROOT="./data/7scenes",
             resolution=resolution,
             num_seq=1,
             full_video=True,
             kf_every=2,
             max_frames=args.max_frames,
         )
-    }
+
+    if args.eval_dataset in ("dtu", "all"):
+        # 15 standard test scenes used by DUSt3R / Spann3R / MASt3R
+        DTU_TEST_SCENES = [
+            "scan8",  "scan21", "scan30", "scan31", "scan34",
+            "scan38", "scan40", "scan41", "scan45", "scan55",
+            "scan63", "scan82", "scan103","scan110","scan114",
+        ]
+        datasets_all["DTU"] = DTU(
+            split="test",
+            ROOT=args.dtu_root,
+            resolution=resolution,
+            full_video=True,
+            kf_every=1,
+            test_id=DTU_TEST_SCENES,
+            num_seq=1,
+        )
 
     # ====== print the number of views for each scene ======
     print("\n=== number of views for each scene ===")
@@ -73,20 +115,23 @@ def main(args):
         print(f"\n{name_data} dataset:")
         for scene_id in dataset.scene_list:
             if name_data == "NRGBD":
-                # NRGBD dataset file structure
                 data_path = osp.join(dataset.ROOT, scene_id, "images")
                 num_files = len([name for name in os.listdir(data_path) if name.endswith('.png')])
                 view_count = len([f"{i}" for i in range(num_files)][::dataset.kf_every])
+            elif name_data == "DTU":
+                data_path = osp.join(dataset.ROOT, scene_id, "images")
+                num_files = sum(1 for f in os.listdir(data_path) if f.endswith('.jpg'))
+                view_count = (num_files + dataset.kf_every - 1) // dataset.kf_every
             else:
-                # SevenScenes dataset file structure
+                # SevenScenes
                 data_path = osp.join(dataset.ROOT, scene_id)
                 num_files = len([name for name in os.listdir(data_path) if "color" in name])
                 view_count = len([f"{i:06d}" for i in range(num_files)][::dataset.kf_every])
-            
-            # consider max_frames limit
-            if dataset.max_frames is not None:
-                actual_view_count = min(view_count, dataset.max_frames)
-                print(f"  {scene_id}: {actual_view_count} views (original: {view_count}, limit: {dataset.max_frames})")
+
+            max_frames = getattr(dataset, 'max_frames', None)
+            if max_frames is not None:
+                actual_view_count = min(view_count, max_frames)
+                print(f"  {scene_id}: {actual_view_count} views (original: {view_count}, limit: {max_frames})")
             else:
                 print(f"  {scene_id}: {view_count} views")
     print("================================\n")
@@ -101,8 +146,9 @@ def main(args):
     from dust3r.utils.geometry import geotrf
     from copy import deepcopy
 
+    from eval.relpose.launch import apply_ddd3r_config
     model = ARCroco3DStereo.from_pretrained(args.weights).to(device)
-    model.config.model_update_type = args.model_update_type
+    apply_ddd3r_config(args, model)
 
     model.eval()
     # else:

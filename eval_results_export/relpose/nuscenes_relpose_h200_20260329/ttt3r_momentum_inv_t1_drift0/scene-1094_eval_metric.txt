@@ -1,0 +1,34 @@
+Seq: scene-1094 
+
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	82.824062
+      mean	32.044196
+    median	31.310921
+       min	2.784884
+      rmse	37.115186
+       sse	55101.480849
+       std	18.727160
+RPE w.r.t. rotation angle in degrees (deg)
+for delta = 1 (frames) using all pairs
+(with Sim(3) Umeyama alignment)
+
+       max	177.070400
+      mean	20.356403
+    median	2.388589
+       min	0.073553
+      rmse	48.796450
+       sse	92862.647190
+       std	44.347608
+RPE w.r.t. translation part (m)
+for delta = 1 (frames) using all pairs
+(with Sim(3) Umeyama alignment)
+
+       max	14.515889
+      mean	3.803543
+    median	3.480982
+       min	0.046242
+      rmse	5.064691
+       sse	1000.392627
+       std	3.344272

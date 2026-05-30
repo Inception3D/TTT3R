@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Analysis results (large images, npz, logs)
+analysis_results/
+
 # C extensions
 *.so
 
@@ -59,3 +62,4 @@ tmp
 eval_results
 
 .vscode
+model/

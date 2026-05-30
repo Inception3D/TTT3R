@@ -1,0 +1,2 @@
+num_scenes,num_improved,num_degraded,median_baseline_ate,median_method_ate,mean_rel_improve_pct,median_rel_improve_pct,best_scene,worst_scene
+65,31,34,0.20304,0.19217,0.9170931634552167,-1.3501397605540346,scene0793_00,scene0789_00

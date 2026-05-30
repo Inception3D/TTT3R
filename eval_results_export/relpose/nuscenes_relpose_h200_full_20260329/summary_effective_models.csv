@@ -1,0 +1,4 @@
+model,avg_ate,avg_rpe_trans,avg_rpe_rot
+cut3r,2.32265,0.85829,0.72078
+ttt3r,5.02525,2.07429,1.16555
+ttt3r_momentum_inv_t1,11.83113,4.72726,3.73936

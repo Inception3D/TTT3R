@@ -1,0 +1,2 @@
+num_points,baseline_type,method_type,mean_baseline_var_delta_cosine,mean_convergence_improve_pct,pearson_corr,spearman_corr
+12,cut3r,ttt3r,0.04218983428641532,38.10132354386023,0.8896231965824679,0.6153846153846154

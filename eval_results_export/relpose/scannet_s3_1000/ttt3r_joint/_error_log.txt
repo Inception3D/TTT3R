@@ -1,0 +1,292 @@
+scannet_s3_1000-scene0707_00     | ATE: 0.51745, RPE trans: 0.06895, RPE rot: 0.77594
+0.51745
+0.06895
+0.77594
+Exception in sequence scene0708_00: Eigenvalues did not converge
+scannet_s3_1000-scene0709_00     | ATE: 0.68693, RPE trans: 0.12072, RPE rot: 3.45177
+0.68693
+0.12072
+3.45177
+scannet_s3_1000-scene0710_00     | ATE: 0.12632, RPE trans: 0.04312, RPE rot: 0.91115
+0.12632
+0.04312
+0.91115
+Exception in sequence scene0711_00: Eigenvalues did not converge
+scannet_s3_1000-scene0712_00     | ATE: 0.16293, RPE trans: 0.03801, RPE rot: 0.94770
+0.16293
+0.03801
+0.94770
+Exception in sequence scene0713_00: Eigenvalues did not converge
+scannet_s3_1000-scene0714_00     | ATE: 0.45013, RPE trans: 0.14566, RPE rot: 14.44327
+0.45013
+0.14566
+14.44327
+scannet_s3_1000-scene0715_00     | ATE: 0.54825, RPE trans: 0.11299, RPE rot: 12.24203
+0.54825
+0.11299
+12.24203
+Exception in sequence scene0716_00: Eigenvalues did not converge
+scannet_s3_1000-scene0717_00     | ATE: 0.44588, RPE trans: 0.12757, RPE rot: 15.58950
+0.44588
+0.12757
+15.58950
+scannet_s3_1000-scene0718_00     | ATE: 0.37507, RPE trans: 0.08103, RPE rot: 25.50106
+0.37507
+0.08103
+25.50106
+scannet_s3_1000-scene0719_00     | ATE: 0.26623, RPE trans: 0.05841, RPE rot: 0.96327
+0.26623
+0.05841
+0.96327
+scannet_s3_1000-scene0720_00     | ATE: 0.15330, RPE trans: 0.03183, RPE rot: 1.08053
+0.15330
+0.03183
+1.08053
+scannet_s3_1000-scene0721_00     | ATE: 0.23322, RPE trans: 0.03968, RPE rot: 1.03177
+0.23322
+0.03968
+1.03177
+scannet_s3_1000-scene0722_00     | ATE: 0.34039, RPE trans: 0.06935, RPE rot: 1.44436
+0.34039
+0.06935
+1.44436
+scannet_s3_1000-scene0723_00     | ATE: 0.18094, RPE trans: 0.02935, RPE rot: 1.05178
+0.18094
+0.02935
+1.05178
+scannet_s3_1000-scene0724_00     | ATE: 0.10309, RPE trans: 0.03006, RPE rot: 1.45877
+0.10309
+0.03006
+1.45877
+scannet_s3_1000-scene0725_00     | ATE: 0.17446, RPE trans: 0.04495, RPE rot: 1.66792
+0.17446
+0.04495
+1.66792
+scannet_s3_1000-scene0726_00     | ATE: 0.05873, RPE trans: 0.01579, RPE rot: 0.63527
+0.05873
+0.01579
+0.63527
+Exception in sequence scene0727_00: Eigenvalues did not converge
+Exception in sequence scene0728_00: Eigenvalues did not converge
+Exception in sequence scene0729_00: Eigenvalues did not converge
+Exception in sequence scene0730_00: Eigenvalues did not converge
+scannet_s3_1000-scene0731_00     | ATE: 0.26980, RPE trans: 0.09167, RPE rot: 10.59850
+0.26980
+0.09167
+10.59850
+scannet_s3_1000-scene0732_00     | ATE: 0.31055, RPE trans: 0.05975, RPE rot: 1.54643
+0.31055
+0.05975
+1.54643
+scannet_s3_1000-scene0733_00     | ATE: 0.43119, RPE trans: 0.08193, RPE rot: 6.90986
+0.43119
+0.08193
+6.90986
+scannet_s3_1000-scene0734_00     | ATE: 0.18768, RPE trans: 0.04036, RPE rot: 1.01375
+0.18768
+0.04036
+1.01375
+scannet_s3_1000-scene0735_00     | ATE: 0.16682, RPE trans: 0.03495, RPE rot: 1.87973
+0.16682
+0.03495
+1.87973
+Exception in sequence scene0736_00: Eigenvalues did not converge
+Exception in sequence scene0737_00: Eigenvalues did not converge
+scannet_s3_1000-scene0738_00     | ATE: 0.15358, RPE trans: 0.05222, RPE rot: 0.98884
+0.15358
+0.05222
+0.98884
+scannet_s3_1000-scene0739_00     | ATE: 0.20330, RPE trans: 0.03621, RPE rot: 0.77336
+0.20330
+0.03621
+0.77336
+scannet_s3_1000-scene0740_00     | ATE: 0.20618, RPE trans: 0.04486, RPE rot: 5.79925
+0.20618
+0.04486
+5.79925
+scannet_s3_1000-scene0741_00     | ATE: 0.15059, RPE trans: 0.02928, RPE rot: 0.65649
+0.15059
+0.02928
+0.65649
+scannet_s3_1000-scene0742_00     | ATE: 0.07636, RPE trans: 0.02187, RPE rot: 0.89630
+0.07636
+0.02187
+0.89630
+scannet_s3_1000-scene0743_00     | ATE: 0.16325, RPE trans: 0.02962, RPE rot: 3.35125
+0.16325
+0.02962
+3.35125
+scannet_s3_1000-scene0744_00     | ATE: 0.26282, RPE trans: 0.05445, RPE rot: 1.10297
+0.26282
+0.05445
+1.10297
+scannet_s3_1000-scene0745_00     | ATE: 0.51812, RPE trans: 0.07429, RPE rot: 1.77885
+0.51812
+0.07429
+1.77885
+scannet_s3_1000-scene0746_00     | ATE: 0.30409, RPE trans: 0.10735, RPE rot: 6.52312
+0.30409
+0.10735
+6.52312
+scannet_s3_1000-scene0747_00     | ATE: 0.63308, RPE trans: 0.15353, RPE rot: 1.37688
+0.63308
+0.15353
+1.37688
+scannet_s3_1000-scene0748_00     | ATE: 0.32135, RPE trans: 0.17733, RPE rot: 8.95126
+0.32135
+0.17733
+8.95126
+Exception in sequence scene0749_00: Eigenvalues did not converge
+Exception in sequence scene0750_00: Eigenvalues did not converge
+Exception in sequence scene0751_00: Eigenvalues did not converge
+scannet_s3_1000-scene0752_00     | ATE: 0.29728, RPE trans: 0.07220, RPE rot: 2.96956
+0.29728
+0.07220
+2.96956
+scannet_s3_1000-scene0753_00     | ATE: 0.26569, RPE trans: 0.04180, RPE rot: 0.90517
+0.26569
+0.04180
+0.90517
+scannet_s3_1000-scene0754_00     | ATE: 0.16776, RPE trans: 0.03473, RPE rot: 0.83145
+0.16776
+0.03473
+0.83145
+Exception in sequence scene0755_00: Eigenvalues did not converge
+scannet_s3_1000-scene0756_00     | ATE: 0.33074, RPE trans: 0.04237, RPE rot: 1.17988
+0.33074
+0.04237
+1.17988
+scannet_s3_1000-scene0757_00     | ATE: 0.38242, RPE trans: 0.04517, RPE rot: 0.94682
+0.38242
+0.04517
+0.94682
+scannet_s3_1000-scene0758_00     | ATE: 0.12280, RPE trans: 0.03893, RPE rot: 0.73125
+0.12280
+0.03893
+0.73125
+scannet_s3_1000-scene0759_00     | ATE: 0.11928, RPE trans: 0.03534, RPE rot: 0.70268
+0.11928
+0.03534
+0.70268
+scannet_s3_1000-scene0760_00     | ATE: 0.11722, RPE trans: 0.03218, RPE rot: 0.65083
+0.11722
+0.03218
+0.65083
+Exception in sequence scene0761_00: Eigenvalues did not converge
+scannet_s3_1000-scene0762_00     | ATE: 0.22039, RPE trans: 0.04171, RPE rot: 0.75948
+0.22039
+0.04171
+0.75948
+Exception in sequence scene0763_00: Eigenvalues did not converge
+Exception in sequence scene0764_00: Eigenvalues did not converge
+Exception in sequence scene0765_00: Eigenvalues did not converge
+scannet_s3_1000-scene0766_00     | ATE: 0.52809, RPE trans: 0.09239, RPE rot: 3.39137
+0.52809
+0.09239
+3.39137
+scannet_s3_1000-scene0767_00     | ATE: 0.12928, RPE trans: 0.02488, RPE rot: 1.23707
+0.12928
+0.02488
+1.23707
+Exception in sequence scene0768_00: Eigenvalues did not converge
+Exception in sequence scene0769_00: Eigenvalues did not converge
+Exception in sequence scene0770_00: Eigenvalues did not converge
+Exception in sequence scene0771_00: Eigenvalues did not converge
+scannet_s3_1000-scene0772_00     | ATE: 0.61648, RPE trans: 0.06339, RPE rot: 1.90924
+0.61648
+0.06339
+1.90924
+Exception in sequence scene0773_00: Eigenvalues did not converge
+Exception in sequence scene0774_00: Eigenvalues did not converge
+Exception in sequence scene0775_00: Eigenvalues did not converge
+scannet_s3_1000-scene0776_00     | ATE: 0.59213, RPE trans: 0.09077, RPE rot: 1.84756
+0.59213
+0.09077
+1.84756
+scannet_s3_1000-scene0781_00     | ATE: 0.17508, RPE trans: 0.04423, RPE rot: 0.62544
+0.17508
+0.04423
+0.62544
+scannet_s3_1000-scene0782_00     | ATE: 0.14344, RPE trans: 0.03999, RPE rot: 0.66138
+0.14344
+0.03999
+0.66138
+scannet_s3_1000-scene0783_00     | ATE: 0.15268, RPE trans: 0.04507, RPE rot: 0.74098
+0.15268
+0.04507
+0.74098
+Exception in sequence scene0784_00: Eigenvalues did not converge
+scannet_s3_1000-scene0785_00     | ATE: 0.39162, RPE trans: 0.06002, RPE rot: 1.56954
+0.39162
+0.06002
+1.56954
+scannet_s3_1000-scene0786_00     | ATE: 0.17589, RPE trans: 0.04344, RPE rot: 0.79471
+0.17589
+0.04344
+0.79471
+scannet_s3_1000-scene0787_00     | ATE: 0.57520, RPE trans: 0.07667, RPE rot: 1.47672
+0.57520
+0.07667
+1.47672
+scannet_s3_1000-scene0788_00     | ATE: 0.84975, RPE trans: 0.07993, RPE rot: 1.12498
+0.84975
+0.07993
+1.12498
+scannet_s3_1000-scene0789_00     | ATE: 0.21426, RPE trans: 0.03277, RPE rot: 0.48014
+0.21426
+0.03277
+0.48014
+scannet_s3_1000-scene0790_00     | ATE: 0.14863, RPE trans: 0.04153, RPE rot: 0.78170
+0.14863
+0.04153
+0.78170
+Exception in sequence scene0791_00: Eigenvalues did not converge
+scannet_s3_1000-scene0792_00     | ATE: 0.12529, RPE trans: 0.05196, RPE rot: 0.91067
+0.12529
+0.05196
+0.91067
+scannet_s3_1000-scene0793_00     | ATE: 0.54624, RPE trans: 0.06742, RPE rot: 0.74868
+0.54624
+0.06742
+0.74868
+Exception in sequence scene0794_00: Eigenvalues did not converge
+Exception in sequence scene0795_00: Eigenvalues did not converge
+Exception in sequence scene0796_00: Eigenvalues did not converge
+scannet_s3_1000-scene0797_00     | ATE: 0.34632, RPE trans: 0.09582, RPE rot: 1.52383
+0.34632
+0.09582
+1.52383
+scannet_s3_1000-scene0798_00     | ATE: 0.11812, RPE trans: 0.04097, RPE rot: 0.61752
+0.11812
+0.04097
+0.61752
+scannet_s3_1000-scene0799_00     | ATE: 0.14849, RPE trans: 0.04400, RPE rot: 0.65434
+0.14849
+0.04400
+0.65434
+scannet_s3_1000-scene0800_00     | ATE: 0.45346, RPE trans: 0.11922, RPE rot: 5.42909
+0.45346
+0.11922
+5.42909
+scannet_s3_1000-scene0801_00     | ATE: 0.03890, RPE trans: 0.01162, RPE rot: 0.28740
+0.03890
+0.01162
+0.28740
+Exception in sequence scene0802_00: Eigenvalues did not converge
+scannet_s3_1000-scene0803_00     | ATE: 0.17096, RPE trans: 0.03339, RPE rot: 1.17565
+0.17096
+0.03339
+1.17565
+scannet_s3_1000-scene0804_00     | ATE: 0.16325, RPE trans: 0.03669, RPE rot: 0.67443
+0.16325
+0.03669
+0.67443
+scannet_s3_1000-scene0805_00     | ATE: 0.28718, RPE trans: 0.07660, RPE rot: 5.49016
+0.28718
+0.07660
+5.49016
+scannet_s3_1000-scene0806_00     | ATE: 0.09369, RPE trans: 0.02440, RPE rot: 0.67384
+0.09369
+0.02440
+0.67384
+Average ATE: 0.28292, Average RPE trans: 0.05952, Average RPE rot: 2.79764

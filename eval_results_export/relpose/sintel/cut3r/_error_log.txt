@@ -1,0 +1,57 @@
+sintel-alley_2          | ATE: 0.03155, RPE trans: 0.01971, RPE rot: 0.18996
+0.03155
+0.01971
+0.18996
+sintel-ambush_4         | ATE: 0.16331, RPE trans: 0.08596, RPE rot: 0.90525
+0.16331
+0.08596
+0.90525
+sintel-ambush_5         | ATE: 0.07442, RPE trans: 0.03307, RPE rot: 0.51194
+0.07442
+0.03307
+0.51194
+sintel-ambush_6         | ATE: 0.29109, RPE trans: 0.07383, RPE rot: 2.09635
+0.29109
+0.07383
+2.09635
+sintel-cave_2           | ATE: 0.86988, RPE trans: 0.29112, RPE rot: 1.83020
+0.86988
+0.29112
+1.83020
+sintel-cave_4           | ATE: 0.15755, RPE trans: 0.04323, RPE rot: 0.58645
+0.15755
+0.04323
+0.58645
+sintel-market_2         | ATE: 0.07160, RPE trans: 0.00874, RPE rot: 0.02808
+0.07160
+0.00874
+0.02808
+sintel-market_5         | ATE: 0.27285, RPE trans: 0.14554, RPE rot: 0.53825
+0.27285
+0.14554
+0.53825
+sintel-market_6         | ATE: 0.09258, RPE trans: 0.03662, RPE rot: 0.41423
+0.09258
+0.03662
+0.41423
+sintel-shaman_3         | ATE: 0.01605, RPE trans: 0.00357, RPE rot: 0.21141
+0.01605
+0.00357
+0.21141
+sintel-sleeping_1       | ATE: 0.01633, RPE trans: 0.00644, RPE rot: 0.27221
+0.01633
+0.00644
+0.27221
+sintel-sleeping_2       | ATE: 0.01442, RPE trans: 0.00538, RPE rot: 0.13206
+0.01442
+0.00538
+0.13206
+sintel-temple_2         | ATE: 0.11785, RPE trans: 0.05611, RPE rot: 0.22511
+0.11785
+0.05611
+0.22511
+sintel-temple_3         | ATE: 0.73777, RPE trans: 0.15837, RPE rot: 0.80508
+0.73777
+0.15837
+0.80508
+Average ATE: 0.20909, Average RPE trans: 0.06912, Average RPE rot: 0.62476

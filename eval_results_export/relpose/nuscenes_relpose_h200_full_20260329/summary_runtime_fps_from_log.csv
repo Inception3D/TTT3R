@@ -1,0 +1,5 @@
+dataset,output_tag,model_name,alpha_drift,total_runtime_sec,total_runtime_min,fps_count,fps_mean,fps_median,fps_min,fps_max
+nuscenes_relpose,cut3r,cut3r,0.15,3205,53.417,850,19.391471,19.670000,11.660000,20.000000
+nuscenes_relpose,ttt3r,ttt3r,0.15,3130,52.167,850,19.278259,19.610000,8.640000,19.930000
+nuscenes_relpose,ttt3r_momentum_inv_t1,ttt3r_momentum_inv_t1,0.15,3223,53.717,850,19.078765,19.600000,11.970000,19.970000
+nuscenes_relpose,ttt3r_momentum_inv_t1_drift0,ttt3r_momentum_inv_t1,0.0,3237,53.950,850,18.805918,19.200000,11.890000,19.570000

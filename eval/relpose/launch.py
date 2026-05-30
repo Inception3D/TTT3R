@@ -51,8 +51,31 @@ def get_args_parser():
         "--model_update_type",
         type=str,
         default="cut3r",
-        help="model type for state update strategy: cut3r or ttt3r",
+        help="model type for state update strategy: cut3r, ttt3r, ttt3r_joint, etc.",
     )
+    # DDD3R unified parameters (paper notation)
+    parser.add_argument("--alpha", type=float, default=0.5, help="DDD3R constant dampening rate")
+    parser.add_argument("--alpha_perp", type=float, default=0.5, help="DDD3R novel component coefficient")
+    parser.add_argument("--alpha_parallel", type=float, default=0.05, help="DDD3R drift component coefficient")
+    parser.add_argument("--beta_ema", type=float, default=0.95, help="DDD3R EMA decay for drift direction")
+    parser.add_argument("--gamma", type=float, default=0.0, help="DDD3R steep adaptive exponent (0=fixed, >0=drift-adaptive)")
+    parser.add_argument("--brake_tau", type=float, default=2.0, help="DDD3R brake temperature")
+    parser.add_argument("--warmup_t0", type=int, default=0, help="DDD3R: no drift suppression for first T0 frames")
+    parser.add_argument("--warmup_window", type=int, default=0, help="DDD3R: linear ramp window after T0")
+    # Keep for abandoned methods
+    parser.add_argument("--spectral_temperature", type=float, default=1.0, help="Layer 2 SIASU temperature")
+    parser.add_argument("--geo_gate_tau", type=float, default=2.0, help="Layer 3 geo gate temperature")
+    parser.add_argument("--geo_gate_freq_cutoff", type=int, default=4, help="Layer 3 geo gate freq cutoff denominator")
+    # Backward-compat aliases (hidden)
+    parser.add_argument("--random_gate_p", type=float, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--ortho_alpha_novel", type=float, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--ortho_alpha_drift", type=float, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--ortho_beta", type=float, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--ortho_gamma", type=float, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--ortho_adaptive", type=str, default="", help=argparse.SUPPRESS)
+    parser.add_argument("--momentum_tau", type=float, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--ortho_warmup_t0", type=int, default=None, help=argparse.SUPPRESS)
+    parser.add_argument("--ortho_warmup_window", type=int, default=None, help=argparse.SUPPRESS)
 
     parser.add_argument(
         "--pose_eval_stride", default=1, type=int, help="stride for pose evaluation"
@@ -75,6 +98,30 @@ def get_args_parser():
     parser.add_argument("--freeze_state", action="store_true", default=False)
     parser.add_argument("--solve_pose", action="store_true", default=False)
     return parser
+
+
+def _resolve_ddd3r_aliases(args):
+    """Map old CLI arg names to new ones (backward compat)."""
+    if args.random_gate_p is not None and args.alpha == 0.5:
+        args.alpha = args.random_gate_p
+    if args.ortho_alpha_novel is not None:
+        args.alpha_perp = args.ortho_alpha_novel
+    if args.ortho_alpha_drift is not None:
+        args.alpha_parallel = args.ortho_alpha_drift
+    if args.ortho_beta is not None:
+        args.beta_ema = args.ortho_beta
+    if args.ortho_gamma is not None:
+        args.gamma = args.ortho_gamma
+    if args.momentum_tau is not None:
+        args.brake_tau = args.momentum_tau
+    if args.ortho_warmup_t0 is not None:
+        args.warmup_t0 = args.ortho_warmup_t0
+    if args.ortho_warmup_window is not None:
+        args.warmup_window = args.ortho_warmup_window
+    # Legacy: ortho_adaptive="steep" → set gamma if not already set
+    if args.ortho_adaptive == 'steep' and args.gamma == 0.0:
+        args.gamma = args.ortho_gamma if args.ortho_gamma is not None else 2.0
+    return args
 
 
 def eval_pose_estimation(args, model, save_dir=None):
@@ -263,6 +310,7 @@ def eval_pose_estimation_dist(args, model, img_path, save_dir=None, mask_path=No
 if __name__ == "__main__":
     args = get_args_parser()
     args = args.parse_args()
+    _resolve_ddd3r_aliases(args)
     add_path_to_dust3r(args.weights)
     from dust3r.utils.image import load_images_for_eval as load_images
     from dust3r.post_process import estimate_focal_knowing_depth
@@ -458,8 +506,45 @@ if __name__ == "__main__":
         )
 
     model = ARCroco3DStereo.from_pretrained(args.weights)
-    
-    # set model type
+
+    # set model type and DDD3R hyperparameters
     model.config.model_update_type = args.model_update_type
+    model.config.alpha = args.alpha
+    model.config.alpha_perp = args.alpha_perp
+    model.config.alpha_parallel = args.alpha_parallel
+    model.config.beta_ema = args.beta_ema
+    model.config.gamma = args.gamma
+    model.config.brake_tau = args.brake_tau
+    model.config.warmup_t0 = args.warmup_t0
+    model.config.warmup_window = args.warmup_window
+    # Keep for abandoned methods
+    model.config.spectral_temperature = args.spectral_temperature
+    model.config.geo_gate_tau = args.geo_gate_tau
+    model.config.geo_gate_freq_cutoff = args.geo_gate_freq_cutoff
 
     eval_pose_estimation(args, model, save_dir=args.output_dir)
+
+
+def apply_ddd3r_config(args, model):
+    """Apply DDD3R hyperparameters from args to model config.
+    Shared by relpose and mv_recon evaluation pipelines.
+    """
+    model.config.model_update_type = args.model_update_type
+    model.config.alpha = getattr(args, 'alpha', 0.5)
+    model.config.alpha_perp = getattr(args, 'alpha_perp', 0.5)
+    model.config.alpha_parallel = getattr(args, 'alpha_parallel', 0.05)
+    model.config.beta_ema = getattr(args, 'beta_ema', 0.95)
+    model.config.gamma = getattr(args, 'gamma', 0.0)
+    model.config.brake_tau = getattr(args, 'brake_tau', 2.0)
+    model.config.warmup_t0 = getattr(args, 'warmup_t0', 0)
+    model.config.warmup_window = getattr(args, 'warmup_window', 0)
+    model.config.spectral_temperature = getattr(args, 'spectral_temperature', 1.0)
+    model.config.geo_gate_tau = getattr(args, 'geo_gate_tau', 2.0)
+    model.config.geo_gate_freq_cutoff = getattr(args, 'geo_gate_freq_cutoff', 4)
+    # Auto-gamma (for mv_recon experiments)
+    model.config.auto_gamma = getattr(args, 'auto_gamma', '')
+    model.config.auto_gamma_warmup = getattr(args, 'auto_gamma_warmup', 30)
+    model.config.auto_gamma_max = getattr(args, 'auto_gamma_max', 3.0)
+    model.config.auto_gamma_k = getattr(args, 'auto_gamma_k', 10.0)
+    model.config.auto_gamma_lo = getattr(args, 'auto_gamma_lo', 0.3)
+    model.config.auto_gamma_hi = getattr(args, 'auto_gamma_hi', 0.6)

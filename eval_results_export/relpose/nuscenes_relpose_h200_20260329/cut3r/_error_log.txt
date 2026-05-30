@@ -1,0 +1,41 @@
+nuscenes_relpose-scene-0061       | ATE: 2.24193, RPE trans: 1.12481, RPE rot: 0.93529
+2.24193
+1.12481
+0.93529
+nuscenes_relpose-scene-0103       | ATE: 1.70694, RPE trans: 0.67177, RPE rot: 0.40613
+1.70694
+0.67177
+0.40613
+nuscenes_relpose-scene-0553       | ATE: 0.00066, RPE trans: 0.00044, RPE rot: 0.09298
+0.00066
+0.00044
+0.09298
+nuscenes_relpose-scene-0655       | ATE: 3.14856, RPE trans: 1.22783, RPE rot: 0.48014
+3.14856
+1.22783
+0.48014
+nuscenes_relpose-scene-0757       | ATE: 0.87130, RPE trans: 0.18075, RPE rot: 0.25387
+0.87130
+0.18075
+0.25387
+nuscenes_relpose-scene-0796       | ATE: 3.30321, RPE trans: 2.03974, RPE rot: 0.89448
+3.30321
+2.03974
+0.89448
+nuscenes_relpose-scene-0916       | ATE: 3.20076, RPE trans: 1.14162, RPE rot: 2.46054
+3.20076
+1.14162
+2.46054
+nuscenes_relpose-scene-1077       | ATE: 7.19926, RPE trans: 4.07395, RPE rot: 1.94662
+7.19926
+4.07395
+1.94662
+nuscenes_relpose-scene-1094       | ATE: 3.99349, RPE trans: 2.06324, RPE rot: 1.39844
+3.99349
+2.06324
+1.39844
+nuscenes_relpose-scene-1100       | ATE: 0.11221, RPE trans: 0.06763, RPE rot: 0.19148
+0.11221
+0.06763
+0.19148
+Average ATE: 2.57783, Average RPE trans: 1.25918, Average RPE rot: 0.90599

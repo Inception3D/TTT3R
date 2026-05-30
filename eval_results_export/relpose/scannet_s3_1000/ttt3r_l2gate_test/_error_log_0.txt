@@ -1,0 +1,5 @@
+scannet_s3_1000-scene0707_00     | ATE: 0.32275, RPE trans: 0.05005, RPE rot: 0.70909
+0.32275
+0.05005
+0.70909
+Exception in sequence scene0708_00: Eigenvalues did not converge

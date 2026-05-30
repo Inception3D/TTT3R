@@ -1,0 +1,5 @@
+model,avg_ate,avg_rpe_trans,avg_rpe_rot,log_path
+cut3r,2.32265,0.85829,0.72078,/root/TTT3R/eval_results/relpose/nuscenes_relpose/cut3r/_error_log.txt
+ttt3r,5.02525,2.07429,1.16555,/root/TTT3R/eval_results/relpose/nuscenes_relpose/ttt3r/_error_log.txt
+ttt3r_momentum_inv_t1,11.83113,4.72726,3.73936,/root/TTT3R/eval_results/relpose/nuscenes_relpose/ttt3r_momentum_inv_t1/_error_log.txt
+ttt3r_momentum_inv_t1_drift0,11.83113,4.72726,3.73936,/root/TTT3R/eval_results/relpose/nuscenes_relpose/ttt3r_momentum_inv_t1_drift0/_error_log.txt

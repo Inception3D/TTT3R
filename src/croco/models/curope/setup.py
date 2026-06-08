@@ -1,6 +1,7 @@
 # Copyright (C) 2022-present Naver Corporation. All rights reserved.
 # Licensed under CC BY-NC-SA 4.0 (non-commercial use only).
 
+import sys
 from setuptools import setup
 import torch
 
@@ -29,6 +30,23 @@ else:
         cxx=["-O3"],
     )
 
+extra_link_args = []
+if sys.platform == "win32" and IS_ROCM:
+    # On Windows, MSVC-compiled objects that include <torch/extension.h>
+    # generate a dllimport reference to c10::ValueError(SourceLocation, string)
+    # via the inherited "using Error::Error" constructor.  c10.dll (built with
+    # clang) does not export this decorated name.  Redirect it to the base
+    # c10::Error(SourceLocation, string) constructor which IS exported.
+    _val_imp = (
+        "__imp_??0ValueError@c10@@QEAA@USourceLocation@1@"
+        "V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z"
+    )
+    _err_imp = (
+        "__imp_??0Error@c10@@QEAA@USourceLocation@1@"
+        "V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z"
+    )
+    extra_link_args.append(f"/ALTERNATENAME:{_val_imp}={_err_imp}")
+
 setup(
     name="curope",
     ext_modules=[
@@ -39,6 +57,7 @@ setup(
                 "kernels.cu",
             ],
             extra_compile_args=extra_compile_args,
+            extra_link_args=extra_link_args,
         )
     ],
     cmdclass={"build_ext": BuildExtension},

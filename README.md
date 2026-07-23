@@ -1,6 +1,8 @@
 <h2 align="center"> <a href="https://rover-xingyu.github.io/TTT3R">TTT3R: 3D Reconstruction as Test-Time Training</a>
 </h2>
 
+<a href="https://rover-xingyu.github.io/TTT3R">[link to project page]</a>
+
 <h5 align="center">
 
 [![arXiv](https://img.shields.io/badge/Arxiv-2509.26645-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2509.26645) 

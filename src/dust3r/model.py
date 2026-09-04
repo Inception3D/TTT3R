@@ -74,7 +74,9 @@ def strip_module(state_dict):
 def load_model(model_path, device, verbose=True):
     if verbose:
         print("... loading model from", model_path)
-    ckpt = torch.load(model_path, map_location="cpu")
+    # PyTorch 2.6+ defaults to weights_only=True, which breaks older
+    # checkpoints storing OmegaConf/config objects alongside weights.
+    ckpt = torch.load(model_path, map_location="cpu", weights_only=False)
     args = ckpt["args"].model.replace(
         "ManyAR_PatchEmbed", "PatchEmbedDust3R"
     )  # ManyAR only for aspect ratio not consistent
@@ -117,6 +119,7 @@ class ARCroco3DStereoConfig(PretrainedConfig):
         pose_conf_head=False,
         pose_head=False,
         model_update_type="cut3r",
+        beta_reduce_mode="mean",
         **croco_kwargs,
     ):
         super().__init__()
@@ -138,6 +141,7 @@ class ARCroco3DStereoConfig(PretrainedConfig):
         self.pose_conf_head = pose_conf_head
         self.pose_head = pose_head
         self.model_update_type = model_update_type
+        self.beta_reduce_mode = beta_reduce_mode
         self.croco_kwargs = croco_kwargs
 
 
@@ -325,6 +329,30 @@ class ARCroco3DStereo(CroCoNet):
                     f"tried to load {pretrained_model_name_or_path} from huggingface, but failed"
                 )
             return model
+
+    def _compute_ttt3r_beta(self, cross_attn_state):
+        cross_attn_state = rearrange(
+            torch.cat(cross_attn_state, dim=0),
+            "l h nstate nimg -> 1 nstate nimg (l h)",
+        )
+        reduce_mode = getattr(self.config, "beta_reduce_mode", "mean")
+
+        if reduce_mode == "mean":
+            beta = torch.sigmoid(cross_attn_state.mean(dim=(-1, -2)))
+        elif reduce_mode == "max":
+            beta = torch.sigmoid(cross_attn_state.amax(dim=(-1, -2)))
+        elif reduce_mode == "variance":
+            beta = torch.sigmoid(cross_attn_state.var(dim=(-1, -2), unbiased=False))
+        elif reduce_mode == "entropy": 
+            attn_probs = torch.softmax(cross_attn_state, dim=2)
+            entropy = -(attn_probs * attn_probs.clamp_min(1e-8).log()).sum(dim=2)
+            norm = torch.log(torch.tensor(cross_attn_state.shape[2], device=entropy.device, dtype=entropy.dtype))
+            entropy = entropy / norm.clamp_min(1e-8)
+            beta = 1.0 - entropy.mean(dim=-1)
+        else:
+            raise ValueError(f"Invalid beta reduction mode: {reduce_mode}")
+
+        return beta[..., None]
 
     def _set_patch_embed(self, img_size=224, patch_size=16, enc_embed_dim=768):
         self.patch_embed = get_patch_embed(
@@ -901,9 +929,7 @@ class ARCroco3DStereo(CroCoNet):
                 if self.config.model_update_type == "cut3r":
                     update_mask1 = update_mask
                 elif self.config.model_update_type == "ttt3r":
-                    cross_attn_state = rearrange(torch.cat(cross_attn_state, dim=0), 'l h nstate nimg -> 1 nstate nimg (l h)') # [12, 16, 768, 1 + 576] -> [1, 768, 1 + 576, 12*16]
-                    state_query_img_key = cross_attn_state.mean(dim=(-1, -2))
-                    update_mask1 = update_mask * torch.sigmoid(state_query_img_key)[..., None] * 1.0
+                    update_mask1 = update_mask * self._compute_ttt3r_beta(cross_attn_state)
                 else:
                     raise ValueError(f"Invalid model type: {self.config.model_update_type}")
 
@@ -1271,9 +1297,7 @@ class ARCroco3DStereo(CroCoNet):
                 if self.config.model_update_type == "cut3r":
                     update_mask1 = update_mask
                 elif self.config.model_update_type == "ttt3r":
-                    cross_attn_state = rearrange(torch.cat(cross_attn_state, dim=0), 'l h nstate nimg -> 1 nstate nimg (l h)') # [12, 16, 768, 1 + 576] -> [1, 768, 1 + 576, 12*16]
-                    state_query_img_key = cross_attn_state.mean(dim=(-1, -2))
-                    update_mask1 = update_mask * torch.sigmoid(state_query_img_key)[..., None] * 1.0
+                    update_mask1 = update_mask * self._compute_ttt3r_beta(cross_attn_state)
                 else:
                     raise ValueError(f"Invalid model type: {self.config.model_update_type}")
 

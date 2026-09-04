@@ -53,6 +53,14 @@ def get_args_parser():
         help="model type for state update strategy: cut3r or ttt3r",
     )
 
+    parser.add_argument(
+        "--beta_reduce_mode",
+        type=str,
+        default="mean",
+        choices=["mean", "max", "variance", "entropy"],
+        help="How TTT3R aggregates cross-attention into per-token update weights.",
+    )
+
 
     parser.add_argument(
         "--pose_eval_stride", default=1, type=int, help="stride for pose evaluation"
@@ -339,5 +347,6 @@ if __name__ == "__main__":
 
     # set model type
     model.config.model_update_type = args.model_update_type
+    model.config.beta_reduce_mode = args.beta_reduce_mode
 
     eval_pose_estimation(args, model, save_dir=args.output_dir)

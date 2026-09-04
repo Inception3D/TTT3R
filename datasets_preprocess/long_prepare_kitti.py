@@ -21,7 +21,7 @@ import os
 import shutil
 
 for TARGET_FRAMES in [50,100,150,200,250,300,350,400,450,500]:
-    depth_dirs = glob.glob("/home/xingyu/monst3r/data/kitti/val/*/proj_depth/groundtruth/image_02")
+    depth_dirs = glob.glob("./data/kitti/val/*/proj_depth/groundtruth/image_02")
     for dir in depth_dirs:
         # new depth dir
         new_depth_dir = f"./data/long_kitti_s1/depth_selection/val_selection_cropped/groundtruth_depth_gathered_{TARGET_FRAMES}/" + dir.split("/")[-4]+"_02"

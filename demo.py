@@ -96,6 +96,13 @@ def parse_args():
         help="model update type: cut3r or ttt3r",
     )
     parser.add_argument(
+        "--beta_reduce_mode",
+        type=str,
+        default="mean",
+        choices=["mean", "max", "variance", "entropy"],
+        help="How TTT3R aggregates cross-attention into per-token update weights.",
+    )
+    parser.add_argument(
         "--frame_interval",
         type=int,
         default=1,
@@ -463,6 +470,7 @@ def run_inference(args):
     print(f"Loading model from {args.model_path}...")
     model = ARCroco3DStereo.from_pretrained(args.model_path).to(device)
     model.config.model_update_type = args.model_update_type
+    model.config.beta_reduce_mode = args.beta_reduce_mode
 
     model.eval()
 

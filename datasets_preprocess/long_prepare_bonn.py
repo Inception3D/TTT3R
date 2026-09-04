@@ -4,10 +4,10 @@ import shutil
 import numpy as np
 
 START_FRAME = 30  # inital frame
-for TARGET_FRAMES in [50,100,150,200,250,300,350,400,450,500]: 
+for TARGET_FRAMES in [50,100,150,200,250,300,350,400,450,500]:
     END_FRAME = START_FRAME + TARGET_FRAMES   # end frame
 
-    dirs = glob.glob("/home/xingyu/monst3r/data/bonn/rgbd_bonn_dataset/*/")
+    dirs = glob.glob("./data/bonn/rgbd_bonn_dataset/*/")
     dirs = sorted(dirs)
 
     # create new base directory
